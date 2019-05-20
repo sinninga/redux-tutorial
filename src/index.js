@@ -4,14 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { combineReducers, createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-function productsReducer(state = [], action) {
-  return state;
-}
+import productsReducer from './reducers/products_reducer';
+import userReducer from './reducers/user_reducer';
 
-function userReducer(state = '', action) {
-  return state
-}
 
 const allReducers = combineReducers({
   products: productsReducer,
@@ -30,9 +27,6 @@ const store = createStore(
   window.devToolsExtension && window.devToolsExtension()
 );
 
-console.log(store.getState())
 
-
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));
 serviceWorker.unregister();
