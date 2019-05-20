@@ -6,12 +6,33 @@ import * as serviceWorker from './serviceWorker';
 import { combineReducers, createStore } from 'redux';
 
 function productsReducer(state = [], action) {
-  if (action.type === 'changeState') {
-    return action.payload.newState;
-  }
-  return 'State';
+  return state;
 }
-const store = createStore(reducer);
+
+function userReducer(state = '', action) {
+  return state
+}
+
+const allReducers = combineReducers({
+  products: productsReducer,
+  user: userReducer
+})
+
+const store = createStore(
+  allReducers,
+  {
+    products: [{
+      name: 'iPhone',
+      price: 'expensive'
+  }],
+    user: 'Mike'
+  },
+  window.devToolsExtension && window.devToolsExtension()
+);
+
+console.log(store.getState())
+
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 serviceWorker.unregister();
