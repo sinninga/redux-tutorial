@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { updateUser } from './actions/user_actions'
 
@@ -40,13 +41,16 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   products: state.products,
-  user: state.user
-})
+  user: state.user,
+  userPlusProp: `${state.user} ${props.aRandomProps}`
+});
 
-const mapActionsToProps = {
-  onUpdateUser: updateUser
+const mapActionsToProps = (dispatch, props) => {
+  return bindActionCreators({
+    onUpdateUser: updateUser
+  }, dispatch);
 };
 
 export default connect(mapStateToProps, mapActionsToProps)(App);
