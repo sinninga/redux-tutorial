@@ -16,7 +16,7 @@ export function updateUser(newUser) {
 export function apiRequest() {
   return dispatch => {
     $.ajax({
-      url: 'http://google.com',
+      // url: 'http://google.com',
       success() {
         console.log('SUCCESS');
       },
